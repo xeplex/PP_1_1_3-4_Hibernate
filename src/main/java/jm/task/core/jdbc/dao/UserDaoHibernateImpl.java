@@ -36,12 +36,18 @@ public class UserDaoHibernateImpl implements UserDao {
 
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
+            logger.warning("При попытке создания таблицы возникла ошибка");
+            try {
                 transaction.rollback();
-                logger.warning("При создании таблицы возникла ошибка");
+            } catch (Exception ex) {
+                logger.warning("При попытке отмены транзакции возникла ошибка");
             }
         } finally {
-            session.close();
+            try {
+                session.close();
+            } catch (Exception e) {
+                logger.warning("При попытке закрытия сессии возникла ошибка");
+            }
         }
     }
 
@@ -59,12 +65,18 @@ public class UserDaoHibernateImpl implements UserDao {
 
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
+            logger.warning("При попытке удаления таблицы возникла ошибка");
+            try {
                 transaction.rollback();
-                logger.warning("При удалении таблицы возникла ошибка");
+            } catch (Exception ex) {
+                logger.warning("При попытке отмены транзакции возникла ошибка");
             }
         } finally {
-            session.close();
+            try {
+                session.close();
+            } catch (Exception e) {
+                logger.warning("При попытке закрытия сессии возникла ошибка");
+            }
         }
     }
 
@@ -80,13 +92,20 @@ public class UserDaoHibernateImpl implements UserDao {
             session.save(user);
 
             transaction.commit();
+            System.out.printf("User с именем — %s добавлен в базу данных %n", name);
         } catch (Exception e) {
-            if (transaction != null) {
+            logger.warning("При попытке добавления пользователя в таблицу возникла ошибка");
+            try {
                 transaction.rollback();
-                logger.warning("При добавлении пользователя в таблицу возникла ошибка");
+            } catch (Exception ex) {
+                logger.warning("При попытке отмены транзакции возникла ошибка");
             }
         } finally {
-            session.close();
+            try {
+                session.close();
+            } catch (Exception e) {
+                logger.warning("При попытке закрытия сессии возникла ошибка");
+            }
         }
     }
 
@@ -102,12 +121,18 @@ public class UserDaoHibernateImpl implements UserDao {
 
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
+            logger.warning("При попытке удаления пользователя из таблицы возникла ошибка");
+            try {
                 transaction.rollback();
-                logger.warning("При удалении пользователя из таблицы возникла ошибка");
+            } catch (Exception ex) {
+                logger.warning("При попытке отмены транзакции возникла ошибка");
             }
         } finally {
-            session.close();
+            try {
+                session.close();
+            } catch (Exception e) {
+                logger.warning("При попытке закрытия сессии возникла ошибка");
+            }
         }
     }
 
@@ -124,12 +149,18 @@ public class UserDaoHibernateImpl implements UserDao {
 
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
+            logger.warning("При попытке получения всех пользователей из таблицы возникла ошибка");
+            try {
                 transaction.rollback();
-                logger.warning("При при получении всех элементов таблицы возникла ошибка");
+            } catch (Exception ex) {
+                logger.warning("При попытке отмены транзакции возникла ошибка");
             }
         } finally {
-            session.close();
+            try {
+                session.close();
+            } catch (Exception e) {
+                logger.warning("При попытке закрытия сессии возникла ошибка");
+            }
         }
         return usersList;
     }
@@ -146,12 +177,18 @@ public class UserDaoHibernateImpl implements UserDao {
 
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
+            logger.warning("При попытке очистки таблицы возникла ошибка");
+            try {
                 transaction.rollback();
-                logger.warning("При очистке таблицы возникла ошибка");
+            } catch (Exception ex) {
+                logger.warning("При попытке отмены транзакции возникла ошибка");
             }
         } finally {
-            session.close();
+            try {
+                session.close();
+            } catch (Exception e) {
+                logger.warning("При попытке закрытия сессии возникла ошибка");
+            }
         }
     }
 }
